@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import Icon from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
@@ -47,60 +47,63 @@ export default function SignUp() {
   }
 
   return (
-    <div className="login-container">
-      <div className="glass-container">
-        <h1>Sign up</h1>
-        <div className="caution">
-          <p>You can use a random email and password for signing up.</p>
+    <div className="login-container flex items-center  h-screen text-white">
+      <div className="glass-container ">
+        <h1 className="text-5xl my-2 text-[#53ddff] ">Sign up</h1>
+        <div className=" pl-1 py-2.5 my-2 rounded">
+          <p className="max-w-[267px] text-lg">
+            ⚠️You can use a random email and password for signing up.
+          </p>
         </div>
-        <form onSubmit={handleSubmit} className="form">
-          <label className="input-label" htmlFor="sign-up-email">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 my-3">
+          <label className="text-2xl" htmlFor="sign-up-email">
             Email
           </label>
           <input
             name="email"
             onChange={handleChange}
             type="email"
-            placeholder="Email address"
+            placeholder="✉️ example@hotmail.com"
             value={signUpFormData.email}
             id="sign-up-email"
+            className="input"
             required
           />
-          <label className="input-label" htmlFor="sign-up-password">
+          <label className="text-2xl" htmlFor="sign-up-password">
             Password
           </label>
-          <div className="input-with-icon">
+          <div className="flex items-center px-2 rounded-md bg-white">
             <input
               id="sign-up-password"
+              className="input -ml-2"
               name="password"
               onChange={handleChange}
               type={inputType}
-              placeholder="Password"
+              placeholder="🔒 123456"
               value={signUpFormData.password}
               minLength={6}
               maxLength={40}
               required
-              className="custom-input"
             />
             {inputType === "password" ? (
               <Icon
                 icon={eyeOff}
                 onClick={() => setInputType("text")}
-                className="icon-comp"
+                className="cursor-pointer"
                 size={25}
-                style={{ display: "flex" }}
+                style={{ display: "flex", color: "black" }}
               />
             ) : (
               <Icon
                 icon={eye}
                 onClick={() => setInputType("password")}
-                className="icon-comp"
+                className="cursor-pointer"
                 size={25}
-                style={{ display: "flex" }}
+                style={{ display: "flex", color: "black" }}
               />
             )}
           </div>
-          <label className="input-label" htmlFor="sign-up-confirm">
+          <label className="text-2xl" htmlFor="sign-up-confirm">
             Confirm password
           </label>
           <input
@@ -108,23 +111,30 @@ export default function SignUp() {
             name="passwordConfirm"
             onChange={handleChange}
             type={inputType}
-            placeholder="Confirm password "
+            placeholder="🔒 123456"
             value={signUpFormData.passwordConfirm}
             maxLength={40}
             required
+            className="input"
           />
           {error && (
             <div className="alert">
-              <h3 className="login-error">{error}</h3>
+              <h3>{error}</h3>
             </div>
           )}
-          <button disabled={status === "submitting"}>
+          <button
+            className="bg-gray-600 hover:bg-[#00ccff] py-2.5 rounded-md my-3"
+            disabled={status === "submitting"}
+          >
             {status === "submitting" ? "Signing up..." : "Sign up"}
           </button>
         </form>
-        <div className="link-div">
+        <div className="text-xl">
           Already have an account?{" "}
-          <Link className="form-link" to="/login">
+          <Link
+            className="text-[#53ddff]  hover:text-[#00ccff] text-xl"
+            to="/login"
+          >
             {" "}
             Sign In{" "}
           </Link>

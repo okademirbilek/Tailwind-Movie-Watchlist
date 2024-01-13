@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function ForgotPassword() {
   const [loginFormData, setLoginFormData] = useState({
@@ -39,11 +39,11 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="login-container">
+    <div className="login-container flex items-center  h-screen text-white">
       <div className="glass-container">
-        <h1>Reset password</h1>
-        <form onSubmit={handleSubmit} className="form">
-          <label className="input-label" htmlFor="reset-email">
+        <h1 className="text-4xl my-2 text-[#53ddff] ">Reset password</h1>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 my-3">
+          <label className="text-2xl" htmlFor="reset-email">
             Email
           </label>
           <input
@@ -51,8 +51,9 @@ export default function ForgotPassword() {
             name="email"
             onChange={handleChange}
             type="email"
-            placeholder="Email address"
+            placeholder="✉️ example@hotmail.com"
             value={loginFormData.email}
+            className="input"
             required
           />
           {error && (
@@ -60,13 +61,24 @@ export default function ForgotPassword() {
               <h3 className="login-error">{error}</h3>
             </div>
           )}
-          <button disabled={status === "submitting"}>
+          <button
+            className="bg-gray-600 hover:bg-[#00ccff] py-2.5 rounded-md my-3"
+            disabled={status === "submitting"}
+          >
             {status === "submitting" ? "waiting..." : "Reset Password"}
           </button>
-          {message && <h3>{message}</h3>}
+          {message && (
+            <div className="bg-green-500 px-1 py-2.5 rounded">
+              <h3>{message}</h3>
+            </div>
+          )}
         </form>
-        <div className="link-div">
-          <Link className="form-link" to="/login">
+        <div className="text-xl">
+          go back to{" "}
+          <Link
+            className="text-[#53ddff]  hover:text-[#00ccff] text-xl"
+            to="/login"
+          >
             Sign In
           </Link>
         </div>

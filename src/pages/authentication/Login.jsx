@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import Icon from "react-icons-kit";
 
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
@@ -49,11 +49,11 @@ export default function Login() {
   }
 
   return (
-    <div className="login-container">
-      <div className="glass-container">
-        <h1>Sign in </h1>
-        <form onSubmit={handleSubmit} className="form">
-          <label className="input-label" htmlFor="login-email">
+    <div className="login-container flex items-center  h-screen text-white">
+      <div className="glass-container ">
+        <h1 className="text- text-5xl my-2 text-[#53ddff] ">Sign in </h1>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 my-3  ">
+          <label className="text-2xl" htmlFor="login-email">
             Email
           </label>
           <input
@@ -61,61 +61,71 @@ export default function Login() {
             name="email"
             onChange={handleChange}
             type="email"
-            placeholder="Email address"
+            placeholder="✉️ example@hotmail.com"
             value={loginFormData.email}
+            className="input"
             required
           />
-          <label className="input-label" htmlFor="login-password">
+          <label className="text-2xl" htmlFor="login-password">
             Password
           </label>
-          <div className="input-with-icon">
+          <div className="flex items-center px-2 rounded-md bg-white">
             <input
               id="login-password"
               name="password"
               onChange={handleChange}
               type={inputType}
-              placeholder="Password"
+              placeholder="🔒 123456"
               value={loginFormData.password}
               minLength={6}
-              className="custom-input"
+              className="input -ml-2"
               required
             />
             {inputType === "password" ? (
               <Icon
                 icon={eyeOff}
                 onClick={() => setInputType("text")}
-                className="icon-comp"
+                className="cursor-pointer"
                 size={25}
-                style={{ display: "flex" }}
+                style={{ display: "flex", color: "black" }}
               />
             ) : (
               <Icon
                 icon={eye}
                 onClick={() => setInputType("password")}
-                className="icon-comp"
+                className="cursor-pointer"
                 size={25}
-                style={{ display: "flex" }}
+                style={{ display: "flex", color: "black" }}
               />
             )}
           </div>
 
           {error && (
             <div className="alert">
-              <h3 className="login-error">{error}</h3>
+              <h3>{error}</h3>
             </div>
           )}
-          <button disabled={status === "submitting"}>
+          <button
+            className="bg-gray-600 hover:bg-[#00ccff] py-2.5 rounded-md my-3"
+            disabled={status === "submitting"}
+          >
             {status === "submitting" ? "Logging in..." : "Log In"}
           </button>
         </form>
-        <div className="link-div">
-          <Link className="form-link" to="/forgot-password">
+        <div>
+          <Link
+            className="text-xl text-[#53ddff] hover:text-[#00ccff]"
+            to="/forgot-password"
+          >
             Forgot Password?
           </Link>
         </div>
-        <div className="link-div">
-          Don’t have an account?{" "}
-          <Link className="form-link" to="/sign-up">
+        <div className="flex items-center gap-1 mt-2">
+          <h2 className="text-xl">Don’t have an account?</h2>{" "}
+          <Link
+            className="text-[#53ddff]  hover:text-[#00ccff] text-xl"
+            to="/sign-up"
+          >
             Sign Up
           </Link>
         </div>

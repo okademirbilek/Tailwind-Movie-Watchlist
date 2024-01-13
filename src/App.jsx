@@ -6,23 +6,23 @@ import MovieDetails from "./pages/MovieDetails.jsx";
 import { BrowserRouter } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import AuthRequired from "./components/AuthRequired";
-import SignUp from "./pages/SignUp";
-import Login from "./pages/Login";
+import SignUp from "./pages/authentication/SignUp.jsx";
+import Login from "./pages/authentication/Login.jsx";
 import { AuthProvider } from "./context/AuthContext";
 import Dashboard from "./pages/Dashboard";
-import ForgotPassword from "./pages/ForgotPassword";
+import ForgotPassword from "./pages/authentication/ForgotPassword.jsx";
 import UpdateProfile from "./pages/UpdateProfile";
 import movieData from "./popularMovies";
 import Header from "./components/Header";
 import PaginatedItems from "./components/PaginatedItems";
 import PopularMovies from "./components/PopularMovies";
 import { SnackbarProvider } from "notistack";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 
 function App() {
   return (
     <AuthProvider>
-      <div className="App">
+      <div className="App max-h-screen">
         <BrowserRouter>
           <Header />
           <Routes>
@@ -58,7 +58,7 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
           <SnackbarProvider autoHideDuration={1000} />
         </BrowserRouter>
       </div>
