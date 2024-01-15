@@ -53,7 +53,6 @@ function App() {
               <Route path="details/:id" element={<MovieDetails />} />
               <Route path="/watchList" element={<WatchList />} />
               <Route path="/dashboard" element={<Dashboard />} />
-
               <Route path="/update-profile" element={<UpdateProfile />} />
               <Route path="*" element={<NotFound />} />
             </Route>

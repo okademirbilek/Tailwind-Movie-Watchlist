@@ -58,13 +58,11 @@ function SlickSlider(props) {
   };
 
   return (
-    <div>
-      <Slider {...settings}>
-        {movieData.map((movie) => (
-          <SliderItem key={movie.id} movie={movie} />
-        ))}
-      </Slider>
-    </div>
+    <Slider {...settings}>
+      {movieData.map((movie) => (
+        <SliderItem key={movie.id} movie={movie} />
+      ))}
+    </Slider>
   );
 }
 

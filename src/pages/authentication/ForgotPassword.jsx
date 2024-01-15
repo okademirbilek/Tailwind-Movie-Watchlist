@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 export default function ForgotPassword() {
@@ -10,8 +10,6 @@ export default function ForgotPassword() {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState("");
   const { resetPassword } = useAuth();
-
-  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -62,7 +60,7 @@ export default function ForgotPassword() {
             </div>
           )}
           <button
-            className="bg-gray-600 hover:bg-[#00ccff] py-2.5 rounded-md my-3"
+            className="bg-gray-600 disabled:bg-gray-50 hover:bg-[#00ccff] py-2.5 rounded-md my-3"
             disabled={status === "submitting"}
           >
             {status === "submitting" ? "waiting..." : "Reset Password"}

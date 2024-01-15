@@ -15,18 +15,19 @@ const SliderItem = ({ movie }) => {
 
   return (
     <div
-      className="carousel-container"
+      className="relative"
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}
     >
-      <img className="carousel-img" style={styles} src={movie.img}></img>
-      <h6 className="movie-year">{movie.year}</h6>
-      {/* <h6 className="movie-icon">⭐</h6> */}
-      <h6 className="movie-star">9.7</h6>
+      <img
+        className="carousel-img mx-auto my-8 w-[175px] h-[250px] rounded-xl  transition"
+        style={styles}
+        src={movie.img}
+      ></img>
       {isShown && (
         <Link to={`/details/${movie.id}`}>
           <img
-            className="play-btn"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
             src="https://www.freepnglogos.com/uploads/play-button-png/play-button-ifa-1.png"
             width="100"
             alt="play button, ifa"

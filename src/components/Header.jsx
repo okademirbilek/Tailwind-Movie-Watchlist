@@ -22,23 +22,19 @@ function Header() {
   }
 
   return (
-    <header id="header">
-      <Link to="/">
-        <button className="glowing-btn">
-          <span className="glowing-txt">
-            MO<span className="faulty-letter">V</span>IE
-          </span>
-        </button>
-      </Link>
-      <nav>
-        <Link to="/watchList">
-          MY WATCHLIST
-          <img src={WatchListIcon} className="popcorn-icon"></img>
+    <header className="w-full flex items-center justify-between pt-4 pb-6 px-4">
+      <Link to="/">Movie</Link>
+      <nav className="flex justify-between items-center gap-12">
+        <Link className="flex items-center gap-2" to="/watchList">
+          <h2 className="text-xl">MY WATCHLIST</h2>
+          <img className="w-10 h-10" src={WatchListIcon}></img>
         </Link>
         <Link to="/dashboard">
-          <div className="user-link">
-            <img src={avatar} className="avatar-icon"></img>
-            <h5>{currentUser?.displayName || "MovieStar123"}</h5>
+          <div className="flex items-center gap-2">
+            <img src={avatar} className="w-10 h-10"></img>
+            <h5 className="text-xl">
+              {currentUser?.displayName || "MovieStar123"}
+            </h5>
           </div>
         </Link>
       </nav>

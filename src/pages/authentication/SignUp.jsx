@@ -79,7 +79,7 @@ export default function SignUp() {
               name="password"
               onChange={handleChange}
               type={inputType}
-              placeholder="🔒 123456"
+              placeholder="Type your password"
               value={signUpFormData.password}
               minLength={6}
               maxLength={40}
@@ -111,7 +111,7 @@ export default function SignUp() {
             name="passwordConfirm"
             onChange={handleChange}
             type={inputType}
-            placeholder="🔒 123456"
+            placeholder="Confirm your password"
             value={signUpFormData.passwordConfirm}
             maxLength={40}
             required
@@ -123,7 +123,7 @@ export default function SignUp() {
             </div>
           )}
           <button
-            className="bg-gray-600 hover:bg-[#00ccff] py-2.5 rounded-md my-3"
+            className="bg-gray-600  disabled:bg-gray-300 hover:bg-[#00ccff] py-2.5 rounded-md my-3"
             disabled={status === "submitting"}
           >
             {status === "submitting" ? "Signing up..." : "Sign up"}

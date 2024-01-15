@@ -106,7 +106,7 @@ export default function Login() {
             </div>
           )}
           <button
-            className="bg-gray-600 hover:bg-[#00ccff] py-2.5 rounded-md my-3"
+            className="bg-gray-600  disabled:bg-gray-300 hover:bg-[#00ccff] py-2.5 rounded-md my-3"
             disabled={status === "submitting"}
           >
             {status === "submitting" ? "Logging in..." : "Log In"}

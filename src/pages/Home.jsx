@@ -24,13 +24,16 @@ function Home() {
             setCurrentMovieName={setCurrentMovieName}
             focusDiv={focusDiv}
           />
-          <div className="carousel" ref={focusDiv}>
+          <div
+            className="container mx-auto my-4 lg:w-8/12  bg-[#242424] rounded-xl"
+            ref={focusDiv}
+          >
             <SlickSlider />
           </div>
         </>
       ) : null}
 
-      <main id="main">
+      <main>
         <Outlet
           context={{
             focusDiv,

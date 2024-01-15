@@ -5,7 +5,7 @@
 
 @layer base {
   html {
-    @apply font-roboto;
+    @apply font-roboto bg-[#100F10];
   }
   .input {
     @apply rounded-md font-bold indent-1 pl-2 pr-4 py-2.5 outline-none text-black;

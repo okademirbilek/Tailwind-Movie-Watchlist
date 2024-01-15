@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Icon from "react-icons-kit";
+import { search } from "react-icons-kit/fa/search";
 
 function SearchBar({ setCurrentMovieName, focusDiv }) {
   const [query, setQuery] = useState("");
@@ -22,10 +24,17 @@ function SearchBar({ setCurrentMovieName, focusDiv }) {
   };
 
   return (
-    <section className="search-bar-container">
-      <form id="search-form" onSubmit={handleSubmit}>
-        <div className="search-bar">
-          <i className="fa fa-search"></i>
+    <section>
+      <form
+        className="flex flex-grow justify-center mb-6"
+        onSubmit={handleSubmit}
+      >
+        <div className="flex flex-grow items-center max-w-[600px] relative">
+          <Icon
+            icon={search}
+            className="cursor-pointer flex items-center justify-center rounded-l-full py-2 px-4 border-gray-100 border border-r-0  bg-white"
+            size={25}
+          />
           <input
             id="movie-name"
             type="text"
@@ -34,10 +43,13 @@ function SearchBar({ setCurrentMovieName, focusDiv }) {
             value={query}
             required
             minLength={3}
-            className="film-input"
+            className="py-2 px-4 text-lg w-full focus:border-blue-500 outline-none"
           ></input>
         </div>
-        <button id="search-btn" type="submit">
+        <button
+          className="py-2 px-4 rounded-r-full border-gray-100 border border-l-0 bg-gray-300 disabled:cursor-wait"
+          type="submit"
+        >
           Search
         </button>
       </form>
