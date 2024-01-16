@@ -7,6 +7,10 @@ export default {
         roboto: ["Roboto", "sans-serif"],
         inter: ["inter", "sans-serif"],
       },
+      backgroundImage: {
+        "remove-btn": "url('./images/Iconminus.png')",
+        "add-btn": "url('./images/Iconplus.png')",
+      },
     },
   },
   plugins: [],

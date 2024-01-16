@@ -22,7 +22,7 @@ function Header() {
   }
 
   return (
-    <header className="w-full flex items-center justify-between pt-4 pb-6 px-4">
+    <header className="container mx-auto w-full flex items-center justify-between pt-4 pb-6 px-4">
       <Link to="/">Movie</Link>
       <nav className="flex justify-between items-center gap-12">
         <Link className="flex items-center gap-2" to="/watchList">

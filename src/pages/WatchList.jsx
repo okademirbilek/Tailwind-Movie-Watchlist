@@ -21,7 +21,7 @@ function WatchList() {
   });
 
   return (
-    <>
+    <div className="container mx-auto pb-4 grid md:grid-cols-3 lg:grid-cols-4  mt-6 bg-slate-600 rounded-xl">
       {movieData.length === 0 ? (
         <div className="empty-watchlist">
           <p className="watchlist-text">
@@ -37,7 +37,7 @@ function WatchList() {
       ) : (
         watchListElement
       )}
-    </>
+    </div>
   );
 }
 

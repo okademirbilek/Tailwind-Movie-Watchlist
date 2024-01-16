@@ -36,8 +36,10 @@ function App() {
                   index
                   element={
                     <>
-                      <h2 className="movies-header">Trending Movies </h2>
-                      <div id="popular-movies-container">
+                      <h2 className="text-3xl my-4 lg:my-12 text-center">
+                        Trending Movies{" "}
+                      </h2>
+                      <div className="container  grid  md:grid-cols-2 xl:grid-cols-3 gap-3">
                         {movieData.map((movie) => {
                           return <PopularMovies key={movie.id} movie={movie} />;
                         })}
