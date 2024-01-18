@@ -3,6 +3,8 @@ import ReactPaginate from "react-paginate";
 import useFetch from "../hooks/useFetch";
 import MovieCart from "./MovieCart.jsx";
 
+import { useQuery } from "@tanstack/react-query";
+
 import { useOutletContext } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
@@ -38,13 +40,38 @@ function PaginatedItems() {
     setCurrentMovieName(params.movie);
   }, [params.movie]);
 
-  const { loading, error, value } = useFetch(
-    `https://omdbapi.com/?apikey=${apiKey}&s=${
-      params?.movie || currentMovieName
-    }&page=${params?.page || currentPage}&type=movie`,
-    {},
-    [params.movie, params.page]
-  );
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["movie", currentPage, params?.movie],
+    keepPreviousData: true,
+    queryFn: async () => {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/search/movie?include_adult=false&query=${
+          params?.movie || currentMovieName
+        }&language=en-US&page=${params?.page || currentPage}&api_key=${apiKey}`,
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNjYwMDJjZDBjODBhMzliYjE0N2JjNDhlMGI0Njg4NSIsInN1YiI6IjY0Mzk0YWQ5MWQ1Mzg2MDBmNDBmZDg5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._G-3ZRhcRj7sNgeUdOJgszgcbSqXcTuyDBqaMUOKYr8`,
+            accept: "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    },
+  });
+
+  if (isLoading) {
+    return <h1>loading...</h1>;
+  }
+  // if (!isLoading) {
+  //   console.log(data);
+  // }
+
+  if (isError) {
+    return <h1>{JSON.stringify(error)}</h1>;
+  }
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
@@ -53,46 +80,26 @@ function PaginatedItems() {
     focusDiv.current.scrollIntoView();
   };
 
-  if (loading) {
-    return <h1 className="error-msg">Loading...</h1>;
-  }
-
-  if (value) {
-    if (value.Response === "False") {
-      return <h1 className="error-msg">{value.Error}</h1>;
-    }
-  }
-
-  if (error) {
-    return (
-      <div className="error-msg">
-        Unable to find what you’re looking for Please try another search
-        {JSON.stringify(error, null, 2)}
-      </div>
-    );
-  }
-
   return (
     <>
       <h2 className="results">Searched Movie Results</h2>
-      {value &&
-        value.Search.map((filmData) => {
-          return (
-            <MovieCart
-              key={filmData.imdbID}
-              filmData={filmData}
-              onClick={addNewMovie}
-              btnId="add-btn"
-              wantSpace={true}
-            />
-          );
-        })}
+      {data.results.map((filmData) => {
+        return (
+          <MovieCart
+            key={filmData.id}
+            filmData={filmData}
+            onClick={addNewMovie}
+            btnId="add-btn"
+            wantSpace={true}
+          />
+        );
+      })}
       <ReactPaginate
         breakLabel="..."
         nextLabel="Next >"
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
-        pageCount={Math.ceil(value.totalResults / 10)}
+        pageCount={data.total_pages}
         previousLabel="< Previous"
         renderOnZeroPageCount={null}
         containerClassName="pagination"

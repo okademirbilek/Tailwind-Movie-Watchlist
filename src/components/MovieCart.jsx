@@ -10,15 +10,17 @@ function MovieCart({
   detailPage = true,
 }) {
   const { movieData } = useAuth();
-  //check if the film already in the watchlist
-  let isExist = null;
-  if (btnId === "add-btn") {
-    isExist = movieData.some(
-      (filmList) => filmList["imdbID"] === filmData.imdbID
-    );
-  }
 
-  const detail = btnId === "add-btn" ? filmData : filmData.id;
+  //check if the movie already in watchlist
+  const isExist =
+    btnId === "add-btn" &&
+    movieData.some((filmList) => filmList.id === filmData.id);
+  console.log(isExist);
+
+  //to use this component in 2 places we control the firebase id to
+  //delete correct data when we use this component in watchlist
+
+  const detail = btnId === "add-btn" ? filmData : filmData.firebaseId;
 
   const [isShown, setIsShown] = useState(false);
 
@@ -31,20 +33,20 @@ function MovieCart({
           onMouseEnter={() => setIsShown(true)}
           onMouseLeave={() => setIsShown(false)}
         >
-          {filmData.Poster !== "N/A" ? (
+          {filmData.poster_path !== null ? (
             <img
-              src={filmData.Poster}
+              src={`https://image.tmdb.org/t/p/original/${filmData.poster_path}`}
               className="w-[200px] h-[300px] rounded-md  max-w-none"
               alt={`${filmData.Title} Poster`}
             />
           ) : (
             <img
               className="w-[200px] h-[300px] rounded-md max-w-none"
-              src="https://www.omdbapi.com/src/poster.jpg"
+              src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg"
             />
           )}
           {isShown && (
-            <Link to={`/details/${filmData.imdbID}`}>
+            <Link to={`/details/${filmData.id}`}>
               <img
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                 src="https://www.freepnglogos.com/uploads/play-button-png/play-button-ifa-1.png"
@@ -53,19 +55,6 @@ function MovieCart({
               />
             </Link>
           )}
-
-          <div className="flex absolute top-0 right-0 px-1 mx-1 my-0.5 rounded-md bg-orange-500">
-            <p>⭐</p>
-            <h5>{filmData.imdbRating}</h5>
-          </div>
-          <div className="absolute top-0 left-0 px-1 mx-1 my-0.5 rounded-md bg-lime-400">
-            <h4>{filmData.Runtime}</h4>
-          </div>
-          {isShown ? (
-            <div className="absolute bottom-0 left-0  bg-red-800 w-full text-center rounded-b-md">
-              <h5>{filmData.Genre}</h5>
-            </div>
-          ) : null}
 
           <button
             onClick={() => onClick(detail)}
@@ -77,20 +66,6 @@ function MovieCart({
             }`}
           ></button>
         </div>
-
-        {/* <div className="flex gap-1">
-            <h3>{filmData.Title}</h3>
-          </div> */}
-
-        {/* {detailPage ? (
-            <div className="detail-link">
-              <Link to={`/details/${filmData.imdbID}`}>Go to detail page</Link>
-            </div>
-          ) : null} */}
-
-        {/* <div className="hidden md:flex">
-            <p>{filmData.Plot}</p>
-          </div> */}
       </div>
     </>
   );

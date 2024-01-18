@@ -1,10 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import MovieCart from "../components/MovieCart";
-
-import useFetch from "../hooks/useFetch";
-
 import { useAuth } from "../context/AuthContext";
+import { useQuery } from "@tanstack/react-query";
 
 const apiKey = import.meta.env.VITE_REACT_APP_OMDB_KEY;
 
@@ -14,29 +11,34 @@ export default function MovieDetails() {
 
   const { addNewMovie } = useAuth();
 
-  const { loading, error, value } = useFetch(
-    `https://omdbapi.com/?apikey=${apiKey}&i=${params.id}&plot=short`,
-    {},
-    [params.id]
-  );
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["movie", params.id],
+    queryFn: async () => {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${params.id}&append_to_response=videos,images?api_key=${apiKey}`,
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNjYwMDJjZDBjODBhMzliYjE0N2JjNDhlMGI0Njg4NSIsInN1YiI6IjY0Mzk0YWQ5MWQ1Mzg2MDBmNDBmZDg5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._G-3ZRhcRj7sNgeUdOJgszgcbSqXcTuyDBqaMUOKYr8`,
+            accept: "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    },
+  });
 
-  if (loading) {
-    return <h1 className="error-msg">Loading...</h1>;
+  if (isLoading) {
+    return <h1>loading...</h1>;
+  }
+  if (!isLoading) {
+    console.log(data);
   }
 
-  if (value) {
-    if (value.Response === "False") {
-      return <h1 className="error-msg">Error: {value.Error}</h1>;
-    }
-  }
-
-  if (error) {
-    return (
-      <div className="error-msg">
-        Error occured:Unable to find what you’re looking for
-        {JSON.stringify(error, null, 2)}
-      </div>
-    );
+  if (isError) {
+    return <h1>{JSON.stringify(error)}</h1>;
   }
 
   function hanleClick() {
@@ -45,7 +47,7 @@ export default function MovieDetails() {
 
   return (
     <div className="movie-detail-container">
-      <>
+      {/* <>
         <MovieCart
           filmData={value}
           onClick={addNewMovie}
@@ -82,7 +84,7 @@ export default function MovieDetails() {
             ></iframe>
           </div>
         ) : null}
-      </>
+      </> */}
     </div>
   );
 }

@@ -76,7 +76,7 @@ function AuthProvider({ children }) {
       // Sync up our local notes array with the snapshot data
       const movieArr = snapshot.docs.map((doc) => ({
         ...doc.data(),
-        id: doc.id,
+        firebaseId: doc.id,
       }));
       setMovieData(movieArr);
     });
@@ -84,9 +84,7 @@ function AuthProvider({ children }) {
   }, [currentUser]);
 
   async function addNewMovie(movieobj) {
-    let isExist = movieData.some(
-      (filmList) => filmList["imdbID"] === movieobj.imdbID
-    );
+    let isExist = movieData.some((filmList) => filmList.id === movieobj.id);
     let message = isExist ? "Already in watchlist" : "Added to watchlist";
     let variant = isExist ? "error" : "success";
     let snackbar = enqueueSnackbar(message, {

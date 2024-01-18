@@ -12,12 +12,10 @@ import { AuthProvider } from "./context/AuthContext";
 import Dashboard from "./pages/Dashboard";
 import ForgotPassword from "./pages/authentication/ForgotPassword.jsx";
 import UpdateProfile from "./pages/UpdateProfile";
-import movieData from "./popularMovies";
 import Header from "./components/Header";
 import PaginatedItems from "./components/PaginatedItems";
 import PopularMovies from "./components/PopularMovies";
 import { SnackbarProvider } from "notistack";
-// import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -32,21 +30,7 @@ function App() {
 
             <Route element={<AuthRequired />}>
               <Route path="/" element={<Home />}>
-                <Route
-                  index
-                  element={
-                    <>
-                      <h2 className="text-3xl my-4 lg:my-12 text-center">
-                        Trending Movies{" "}
-                      </h2>
-                      <div className="container  grid  md:grid-cols-2 xl:grid-cols-3 gap-3">
-                        {movieData.map((movie) => {
-                          return <PopularMovies key={movie.id} movie={movie} />;
-                        })}
-                      </div>
-                    </>
-                  }
-                />
+                <Route index element={<PopularMovies />} />
                 <Route
                   path="/search/:movie/:page"
                   element={<PaginatedItems />}
@@ -59,7 +43,6 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
-          {/* <Footer /> */}
           <SnackbarProvider autoHideDuration={1000} />
         </BrowserRouter>
       </div>

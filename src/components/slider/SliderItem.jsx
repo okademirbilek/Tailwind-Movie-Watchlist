@@ -22,7 +22,7 @@ const SliderItem = ({ movie }) => {
       <img
         className="carousel-img mx-auto my-8 w-[175px] h-[250px] rounded-xl  transition"
         style={styles}
-        src={movie.img}
+        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
       ></img>
       {isShown && (
         <Link to={`/details/${movie.id}`}>

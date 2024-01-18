@@ -11,7 +11,7 @@ function WatchList() {
   const watchListElement = sortedMovieData.map((movie) => {
     return (
       <MovieCart
-        key={movie.imdbID}
+        key={movie.id}
         filmData={movie}
         onClick={deleteMovie}
         btnId="remove-btn"

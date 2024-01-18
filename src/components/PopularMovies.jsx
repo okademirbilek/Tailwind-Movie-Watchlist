@@ -1,27 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, json } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import PopularMovieCart from "./PopularMovieCart";
 
-function PopularMovies(props) {
+const apiKey = import.meta.env.VITE_REACT_APP_TMDB_API_KEY;
+const accessToken = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN;
+
+function PopularMovies() {
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["movie", "trending"],
+    queryFn: async () => {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/trending/movie/week`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken} `,
+            accept: "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    },
+  });
+
+  if (isLoading) {
+    return <h1>loading...</h1>;
+  }
+  // if (!isLoading) {
+  //   console.log(data);
+  // }
+
+  if (isError) {
+    return <h1>{JSON.stringify(error)}</h1>;
+  }
+
   return (
-    <div className="flex  rounded-lg mx-4 md:mx-0  bg-[#242424]">
-      <Link to={`/details/${props.movie.id}`}>
-        <img
-          className="cursor-pointer flex flex-shrink-0 max-w-none w-[150px] h-[250px] rounded-lg"
-          src={props.movie.img}
-        ></img>
-      </Link>
-      <div className="flex flex-col  pt-2 px-5 justify-around">
-        <div className="">
-          <p className="text-ellipsis whitespace-pre-wrap overflow-hidden ">
-            {props.movie.title}
-          </p>
-        </div>
-        <p>Year: {props.movie.year}</p>
-        <div>
-          <p className="text-ellipsis overflow-hidden whitespace-pre-wrap">
-            {props.movie.directedBy}
-          </p>
-        </div>
+    <div className="flex flex-col justify-center items-center my-8 py-4 rounded-lg mx-4 md:mx-0  bg-[#242424]">
+      <h2 className="text-3xl my-4 lg:my-8 text-center">Trending Movies </h2>
+      <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+        {data.results.map((item) => (
+          <PopularMovieCart key={item.id} data={item} />
+        ))}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 
 import SearchBar from "../components/SearchBar.jsx";
 
-import SlickSlider from "../components/SlickSlider.jsx";
+import SlickSlider from "../components/slider/SlickSlider.jsx";
 
 import { Outlet } from "react-router-dom";
 
