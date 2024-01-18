@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import "./slick.css";
 import "./slick-theme.css";
 
+const token2 = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN2;
+
 function SlickSlider(props) {
   const settings = {
     dots: true,
@@ -64,7 +66,7 @@ function SlickSlider(props) {
         `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&sort_by=popularity.desc`,
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNjYwMDJjZDBjODBhMzliYjE0N2JjNDhlMGI0Njg4NSIsInN1YiI6IjY0Mzk0YWQ5MWQ1Mzg2MDBmNDBmZDg5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._G-3ZRhcRj7sNgeUdOJgszgcbSqXcTuyDBqaMUOKYr8`,
+            Authorization: `Bearer ${token2}`,
             accept: "application/json",
           },
         }

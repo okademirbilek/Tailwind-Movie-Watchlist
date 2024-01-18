@@ -14,6 +14,7 @@ import useEffectOnUpdate from "../hooks/useEffectOnUpdate";
 import { useParams } from "react-router-dom";
 
 const apiKey = import.meta.env.VITE_REACT_APP_OMDB_KEY;
+const token1 = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN1;
 
 import { useNavigate } from "react-router-dom";
 
@@ -50,7 +51,7 @@ function PaginatedItems() {
         }&language=en-US&page=${params?.page || currentPage}&api_key=${apiKey}`,
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNjYwMDJjZDBjODBhMzliYjE0N2JjNDhlMGI0Njg4NSIsInN1YiI6IjY0Mzk0YWQ5MWQ1Mzg2MDBmNDBmZDg5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._G-3ZRhcRj7sNgeUdOJgszgcbSqXcTuyDBqaMUOKYr8`,
+            Authorization: `Bearer ${token1}`,
             accept: "application/json",
           },
         }
