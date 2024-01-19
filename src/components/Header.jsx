@@ -33,7 +33,7 @@ function Header() {
           <div className="flex items-center gap-2">
             <img src={avatar} className="w-10 h-10"></img>
             <h5 className="text-xl">
-              {currentUser?.displayName || "MovieStar123"}
+              {/* {currentUser?.displayName || "MovieStar123"} */}
             </h5>
           </div>
         </Link>

@@ -20,7 +20,7 @@ const SliderItem = ({ movie }) => {
       onMouseLeave={() => setIsShown(false)}
     >
       <img
-        className="carousel-img mx-auto my-8 w-[175px] h-[250px] rounded-xl  transition"
+        className="carousel-img mx-auto my-8 w-[200px] h-[300px] md:w-[175px] md:h-[250px] rounded-xl  transition"
         style={styles}
         src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
       ></img>

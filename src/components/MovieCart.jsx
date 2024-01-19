@@ -10,19 +10,17 @@ function MovieCart({
   detailPage = true,
 }) {
   const { movieData } = useAuth();
+  const [isShown, setIsShown] = useState(false);
 
   //check if the movie already in watchlist
   const isExist =
     btnId === "add-btn" &&
     movieData.some((filmList) => filmList.id === filmData.id);
-  console.log(isExist);
 
   //to use this component in 2 places we control the firebase id to
   //delete correct data when we use this component in watchlist
 
   const detail = btnId === "add-btn" ? filmData : filmData.firebaseId;
-
-  const [isShown, setIsShown] = useState(false);
 
   return (
     <>
@@ -45,6 +43,7 @@ function MovieCart({
               src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg"
             />
           )}
+          <h2 className="max-w-[200px]">{filmData.original_title}</h2>
           {isShown && (
             <Link to={`/details/${filmData.id}`}>
               <img

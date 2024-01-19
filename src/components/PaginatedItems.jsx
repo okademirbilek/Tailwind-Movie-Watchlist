@@ -83,18 +83,22 @@ function PaginatedItems() {
 
   return (
     <>
-      <h2 className="results">Searched Movie Results</h2>
-      {data.results.map((filmData) => {
-        return (
-          <MovieCart
-            key={filmData.id}
-            filmData={filmData}
-            onClick={addNewMovie}
-            btnId="add-btn"
-            wantSpace={true}
-          />
-        );
-      })}
+      <h2 className="text-center text-2xl pt-8">Searched Movie Results</h2>
+
+      <div className="grid items-center justify-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        {data.results.map((filmData) => {
+          return (
+            <MovieCart
+              key={filmData.id}
+              filmData={filmData}
+              onClick={addNewMovie}
+              btnId="add-btn"
+              wantSpace={true}
+            />
+          );
+        })}
+      </div>
+
       <ReactPaginate
         breakLabel="..."
         nextLabel="Next >"

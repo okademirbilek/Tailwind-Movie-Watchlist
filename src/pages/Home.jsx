@@ -33,7 +33,7 @@ function Home() {
         </div>
       ) : null}
 
-      <main className="px-4 ">
+      <main className="md:px-4">
         <Outlet
           context={{
             focusDiv,
