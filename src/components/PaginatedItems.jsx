@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import useFetch from "../hooks/useFetch";
+
 import MovieCart from "./MovieCart.jsx";
 
 import { useQuery } from "@tanstack/react-query";
@@ -16,7 +16,27 @@ import { useParams } from "react-router-dom";
 const apiKey = import.meta.env.VITE_REACT_APP_OMDB_KEY;
 const token1 = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN1;
 
+// const fetchMovie = async (params, currentMovieName, currentPage) => {
+//   console.log(params, currentMovieName, currentPage);
+//   const response = await fetch(
+//     `https://api.themoviedb.org/3/search/movie?include_adult=false&query=${
+//       params?.movie || currentMovieName
+//     }&language=en-US&page=${params?.page || currentPage}&api_key=${apiKey}`,
+//     {
+//       headers: {
+//         Authorization: `Bearer ${token1}`,
+//         accept: "application/json",
+//       },
+//     }
+//   );
+//   if (!response.ok) {
+//     throw new Error("Network response was not ok");
+//   }
+//   return response.json();
+// };
+
 import { useNavigate } from "react-router-dom";
+import useFetchSearchMovie from "../hooks/useFetchSearchMovie.jsx";
 
 function PaginatedItems() {
   const { addNewMovie } = useAuth();
@@ -41,27 +61,11 @@ function PaginatedItems() {
     setCurrentMovieName(params.movie);
   }, [params.movie]);
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["movie", currentPage, params?.movie],
-    keepPreviousData: true,
-    queryFn: async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?include_adult=false&query=${
-          params?.movie || currentMovieName
-        }&language=en-US&page=${params?.page || currentPage}&api_key=${apiKey}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token1}`,
-            accept: "application/json",
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    },
-  });
+  const { data, isLoading, isError, error } = useFetchSearchMovie(
+    params,
+    currentMovieName,
+    currentPage
+  );
 
   if (isLoading) {
     return <h1>loading...</h1>;

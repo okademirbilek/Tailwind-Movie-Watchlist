@@ -1,11 +1,9 @@
 import Slider from "react-slick";
 import SliderItem from "./SliderItem";
-import { useQuery } from "@tanstack/react-query";
+import useFetchUpcomingMovies from "../../hooks/useFetchUpcomingMovies";
 
 import "./slick.css";
 import "./slick-theme.css";
-
-const token2 = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN2;
 
 function SlickSlider(props) {
   const settings = {
@@ -59,24 +57,7 @@ function SlickSlider(props) {
     ],
   };
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["movie", "upcoming"],
-    queryFn: async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&sort_by=popularity.desc`,
-        {
-          headers: {
-            Authorization: `Bearer ${token2}`,
-            accept: "application/json",
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    },
-  });
+  const { data, isLoading, isError, error } = useFetchUpcomingMovies();
 
   if (isLoading) {
     return <h1>loading...</h1>;

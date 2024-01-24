@@ -1,30 +1,10 @@
 import React, { useState } from "react";
-import { Link, json } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import PopularMovieCart from "./PopularMovieCart";
 
-const apiKey = import.meta.env.VITE_REACT_APP_TMDB_API_KEY;
-const accessToken = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN;
+import PopularMovieCart from "./PopularMovieCart";
+import useFetchPopularMovie from "../hooks/useFetchPopularMovie";
 
 function PopularMovies() {
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["movie", "trending"],
-    queryFn: async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/trending/movie/week`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken} `,
-            accept: "application/json",
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    },
-  });
+  const { data, isLoading, isError, error } = useFetchPopularMovie();
 
   if (isLoading) {
     return <h1>loading...</h1>;
