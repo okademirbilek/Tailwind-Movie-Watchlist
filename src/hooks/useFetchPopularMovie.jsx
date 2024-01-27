@@ -1,10 +1,21 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { fetchPopularMovies } from "../components/api/api";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { fetchPopularMovies } from "../components/services/api";
 
+// const useFetchPopularMovie = () => {
+//   return useQuery({
+//     queryKey: ["movie", "trending"],
+//     queryFn: fetchPopularMovies,
+//   });
+// };
 const useFetchPopularMovie = () => {
-  return useQuery({
-    queryKey: ["movie", "trending"],
+  return useInfiniteQuery({
+    queryKey: ["infinite", "trending", "movies"],
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      const nextPage = lastPage ? allPages.length + 1 : undefined;
+      return nextPage;
+    },
     queryFn: fetchPopularMovies,
   });
 };

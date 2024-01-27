@@ -8,8 +8,8 @@ export default {
         inter: ["inter", "sans-serif"],
       },
       backgroundImage: {
-        "remove-btn": "url('./images/Iconminus.png')",
-        "add-btn": "url('./images/Iconplus.png')",
+        "remove-btn": "url('./assets/images/Iconminus.png')",
+        "add-btn": "url('./assets/images/Iconplus.png')",
       },
     },
   },

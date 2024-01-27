@@ -6,9 +6,10 @@ const token2 = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN2;
 
 const token1 = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN1;
 
-export const fetchPopularMovies = async () => {
+export const fetchPopularMovies = async ({ pageParam }) => {
+  console.log("pageParam", pageParam);
   const response = await fetch(
-    `https://api.themoviedb.org/3/trending/movie/week`,
+    `https://api.themoviedb.org/3/trending/movie/week?page=${pageParam}`,
     {
       headers: {
         Authorization: `Bearer ${accessToken} `,
@@ -19,7 +20,8 @@ export const fetchPopularMovies = async () => {
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
-  return response.json();
+  const data = await response.json();
+  return data;
 };
 
 export const fetchUpcomingMovies = async () => {

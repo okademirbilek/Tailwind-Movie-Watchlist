@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import WatchListIcon from "../images/icons8-popcorn-4.png";
-import avatar from "../images/avatar-img.png";
+import WatchListIcon from "../assets/images/icons8-popcorn-4.png";
+import avatar from "../assets/images/avatar-img.png";
 import { useAuth } from "../context/AuthContext";
 import { useLocation } from "react-router-dom";
 

@@ -16,7 +16,7 @@ function Home() {
   const location = useLocation();
 
   return (
-    <div className="container mx-auto  pb-6 rounded-xl bg-slate-800">
+    <div className="container mx-auto   pb-6 rounded-xl bg-slate-800">
       {(location.key === "default" && location.pathname === "/") ||
       location.key !== "default" ? (
         <div>
@@ -33,7 +33,7 @@ function Home() {
         </div>
       ) : null}
 
-      <main className="md:px-4">
+      <main className="md:px-4 py-4">
         <Outlet
           context={{
             focusDiv,

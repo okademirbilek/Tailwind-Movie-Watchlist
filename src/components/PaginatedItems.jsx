@@ -3,8 +3,6 @@ import ReactPaginate from "react-paginate";
 
 import MovieCart from "./MovieCart.jsx";
 
-import { useQuery } from "@tanstack/react-query";
-
 import { useOutletContext } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
@@ -13,40 +11,22 @@ import useEffectOnUpdate from "../hooks/useEffectOnUpdate";
 
 import { useParams } from "react-router-dom";
 
-const apiKey = import.meta.env.VITE_REACT_APP_OMDB_KEY;
-const token1 = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN1;
-
-// const fetchMovie = async (params, currentMovieName, currentPage) => {
-//   console.log(params, currentMovieName, currentPage);
-//   const response = await fetch(
-//     `https://api.themoviedb.org/3/search/movie?include_adult=false&query=${
-//       params?.movie || currentMovieName
-//     }&language=en-US&page=${params?.page || currentPage}&api_key=${apiKey}`,
-//     {
-//       headers: {
-//         Authorization: `Bearer ${token1}`,
-//         accept: "application/json",
-//       },
-//     }
-//   );
-//   if (!response.ok) {
-//     throw new Error("Network response was not ok");
-//   }
-//   return response.json();
-// };
-
 import { useNavigate } from "react-router-dom";
 import useFetchSearchMovie from "../hooks/useFetchSearchMovie.jsx";
 
+import LoadingDisplay from "../components/LoadingDisplay.jsx";
+import ErrorDisplay from "../components/ErrorDisplay.jsx";
+
 function PaginatedItems() {
+  const params = useParams();
+  const [currentPage, setCurrentPage] = useState(parseInt(params?.page));
   const { addNewMovie } = useAuth();
   const { currentMovieName, setCurrentMovieName, focusDiv } =
     useOutletContext();
-  const params = useParams();
-  const [currentPage, setCurrentPage] = useState(parseInt(params?.page));
 
   const navigate = useNavigate();
 
+  //check whether someone types movie or page in directly url
   useEffectOnUpdate(() => {
     if (isNaN(parseInt(params.page))) {
       navigate(`/`);
@@ -61,22 +41,12 @@ function PaginatedItems() {
     setCurrentMovieName(params.movie);
   }, [params.movie]);
 
+  //get the movie data
   const { data, isLoading, isError, error } = useFetchSearchMovie(
     params,
     currentMovieName,
     currentPage
   );
-
-  if (isLoading) {
-    return <h1>loading...</h1>;
-  }
-  // if (!isLoading) {
-  //   console.log(data);
-  // }
-
-  if (isError) {
-    return <h1>{JSON.stringify(error)}</h1>;
-  }
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
@@ -88,36 +58,40 @@ function PaginatedItems() {
   return (
     <>
       <h2 className="text-center text-2xl pt-8">Searched Movie Results</h2>
-
+      {isLoading && <LoadingDisplay />}
+      {isError && <ErrorDisplay error={error} />}
       <div className="grid items-center justify-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {data.results.map((filmData) => {
-          return (
-            <MovieCart
-              key={filmData.id}
-              filmData={filmData}
-              onClick={addNewMovie}
-              btnId="add-btn"
-              wantSpace={true}
-            />
-          );
-        })}
+        {data &&
+          data.results.map((filmData) => {
+            return (
+              <MovieCart
+                key={filmData.id}
+                filmData={filmData}
+                onClick={addNewMovie}
+                btnId="add-btn"
+                wantSpace={true}
+              />
+            );
+          })}
       </div>
 
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="Next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={data.total_pages}
-        previousLabel="< Previous"
-        renderOnZeroPageCount={null}
-        containerClassName="pagination"
-        pageLinkClassName="page"
-        previousLinkClassName="page-num"
-        nextLinkClassName="page-num"
-        activeLinkClassName="active"
-        forcePage={currentPage - 1}
-      />
+      {data ? (
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="Next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={data.total_pages}
+          previousLabel="< Previous"
+          renderOnZeroPageCount={null}
+          containerClassName="pagination"
+          pageLinkClassName="page"
+          previousLinkClassName="page-num"
+          nextLinkClassName="page-num"
+          activeLinkClassName="active"
+          forcePage={currentPage - 1}
+        />
+      ) : null}
     </>
   );
 }
