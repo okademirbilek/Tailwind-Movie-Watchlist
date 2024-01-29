@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 
 import useFetchDetailMovie from "../hooks/useFetchDetailMovie";
 
-import MovieCart from "../components/MovieCart";
+import MovieDetailCart from "../components/MovieDetailCart";
 
 import LoadingDisplay from "../components/LoadingDisplay";
 import ErrorDisplay from "../components/ErrorDisplay";
@@ -17,15 +17,15 @@ export default function MovieDetails() {
   const { data, isLoading, isError, error } = useFetchDetailMovie(params);
 
   return (
-    <div className="movie-detail-container">
+    <div className="movie-detail-container container mx-auto">
       {isLoading && <LoadingDisplay />}
       {isError && <ErrorDisplay error={error} />}
       {data && (
-        <MovieCart
+        <MovieDetailCart
           key={data.id}
           onClick={addNewMovie}
           btnId="add-btn"
-          filmData={data}
+          data={data}
         />
       )}
     </div>

@@ -15,6 +15,28 @@
     @apply bg-[#25232380]  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 px-6 py-8 container flex flex-col items-center w-auto  mx-auto rounded-2xl;
   }
 
+  /* scrollbar */
+
+  /* width */
+  ::-webkit-scrollbar {
+    @apply w-[12px] h-[12px];
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    @apply bg-[#f1f1f1] w-[12px] h-[12px];
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[#585656];
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#2e2e2e];
+  }
+
   /* buttons */
 
   .remove-btn {
@@ -77,5 +99,10 @@
       flex-wrap: nowrap;
       padding: 0;
     }
+  }
+
+  /* cart items*/
+  .badge {
+    @apply flex items-center flex-shrink-0  gap-2 px-3 py-0.5 bg-[#321C76] rounded-sm w-fit;
   }
 }

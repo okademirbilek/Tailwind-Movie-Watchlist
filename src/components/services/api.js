@@ -1,5 +1,3 @@
-import React from "react";
-
 const apiKey = import.meta.env.VITE_REACT_APP_TMDB_API_KEY;
 const accessToken = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN;
 const token2 = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN2;
@@ -7,7 +5,6 @@ const token2 = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN2;
 const token1 = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN1;
 
 export const fetchPopularMovies = async ({ pageParam }) => {
-  console.log("pageParam", pageParam);
   const response = await fetch(
     `https://api.themoviedb.org/3/trending/movie/week?page=${pageParam}`,
     {
@@ -64,16 +61,17 @@ export const fetchSearchMovie = async (
 
 export const fetchDetailMovie = async (params) => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${params.id}&append_to_response=videos,images?api_key=${apiKey}`,
-    {
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNjYwMDJjZDBjODBhMzliYjE0N2JjNDhlMGI0Njg4NSIsInN1YiI6IjY0Mzk0YWQ5MWQ1Mzg2MDBmNDBmZDg5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._G-3ZRhcRj7sNgeUdOJgszgcbSqXcTuyDBqaMUOKYr8`,
-        accept: "application/json",
-      },
-    }
+    `https://api.themoviedb.org/3/movie/${params.id}?api_key=${apiKey}&language=en-US&append_to_response=alternative_titles,videos,changes,credits,images,keywords,lists,releases,reviews,similar,translations, `
+    // {
+    //   headers: {
+    //     Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNjYwMDJjZDBjODBhMzliYjE0N2JjNDhlMGI0Njg4NSIsInN1YiI6IjY0Mzk0YWQ5MWQ1Mzg2MDBmNDBmZDg5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._G-3ZRhcRj7sNgeUdOJgszgcbSqXcTuyDBqaMUOKYr8`,
+    //     accept: "application/json",
+    //   },
+    // }
   );
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
-  return response.json();
+  const data = await response.json();
+  return data;
 };

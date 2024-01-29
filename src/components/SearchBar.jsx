@@ -24,7 +24,7 @@ function SearchBar({ setCurrentMovieName, focusDiv }) {
   };
 
   return (
-    <section className="container mx-auto">
+    <section className="container mx-auto  pt-6 ">
       <form
         className="flex flex-grow justify-center items-center mb-6 p-4 md:p-0 "
         onSubmit={handleSubmit}
@@ -32,7 +32,7 @@ function SearchBar({ setCurrentMovieName, focusDiv }) {
         <div className="flex flex-grow items-center justify-center  max-w-[600px] relative">
           <Icon
             icon={search}
-            className="cursor-pointer flex items-center justify-center rounded-l-full py-2.5 px-4 border-none h-[44px] bg-white"
+            className=" flex items-center justify-center rounded-l-full py-2.5 px-4 border-none h-[44px] bg-white text-gray-600"
             size={25}
           />
           <input
@@ -43,11 +43,11 @@ function SearchBar({ setCurrentMovieName, focusDiv }) {
             value={query}
             required
             minLength={3}
-            className="py-2 px-4 text-lg w-full outline-none border-none "
+            className="py-2 px-4 text-lg w-full text-black outline-none border-none "
           ></input>
         </div>
         <button
-          className="py-2.5 px-4 rounded-r-full border-none  bg-gray-300 disabled:cursor-wait flex flex-shrink-0"
+          className="py-2.5 px-4 rounded-r-full   bg-gray-600  hover:bg-gray-900 disabled:cursor-wait flex flex-shrink-0"
           type="submit"
         >
           Search
