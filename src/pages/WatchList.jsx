@@ -21,17 +21,24 @@ function WatchList() {
   });
 
   return (
-    <div className="container mx-auto pb-4 grid md:grid-cols-3 lg:grid-cols-4  mt-6 bg-slate-600 rounded-xl">
+    <div
+      className={`container mx-auto ${
+        movieData.length === 0
+          ? "flex items-center justify-center"
+          : "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 "
+      } py-4  mt-6 bg-slate-800 rounded-xl`}
+    >
       {movieData.length === 0 ? (
-        <div className="empty-watchlist">
-          <p className="watchlist-text">
-            Your watchlist is looking a little empty...
+        <div className="empty-watchlist flex flex-col gap-5 items-center justify-center  ">
+          <p className="mt-5 text-2xl">
+            Your watchlist is looking a little empty ...
           </p>
-          <span className="add-btn-container">
-            <Link to="/">
-              <h6 id="add-btn-link"></h6>
-            </Link>
-            <h5>Lets add some movies!</h5>
+          <span className="flex gap-2">
+            <Link
+              className="flex items-center justify-center w-7 h-7 rounded-full add-btn bg-add-btn text-white"
+              to="/"
+            ></Link>
+            <h5 className=" text-xl">Lets add some movies!</h5>
           </span>
         </div>
       ) : (

@@ -25,7 +25,7 @@ function Home() {
             focusDiv={focusDiv}
           />
           <div
-            className="container mx-auto my-4 w-7/12 md:w-8/12  bg-[#242424] rounded-xl"
+            className="container mx-auto mt-10 mb-4 w-7/12 md:w-8/12  bg-[#242424] rounded-xl"
             ref={focusDiv}
           >
             <SlickSlider />

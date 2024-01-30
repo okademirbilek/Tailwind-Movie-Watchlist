@@ -17,7 +17,7 @@ function SlickSlider(props) {
     initialSlide: 0,
     autoplay: true,
     autoplaySpeed: 2500,
-    speed: 1000,
+    speed: 800,
     pauseOnHover: true,
     responsive: [
       {
@@ -63,7 +63,10 @@ function SlickSlider(props) {
   const { data, isLoading, isError, error } = useFetchUpcomingMovies();
 
   return (
-    <>
+    <div className="relative">
+      <div className="shadow-sm bg-black bg-opacity-50  text-2xl w-fit rounded-md  -rotate-12 px-4 py-1 absolute -top-6 -left-16     md:-top-5 md:-left-16">
+        Upcoming
+      </div>
       {isLoading && <LoadingDisplay />}
       {isError && <ErrorDisplay error={error} />}
       {data && (
@@ -73,7 +76,7 @@ function SlickSlider(props) {
           ))}
         </Slider>
       )}
-    </>
+    </div>
   );
 }
 

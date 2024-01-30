@@ -16,6 +16,7 @@ import useFetchSearchMovie from "../hooks/useFetchSearchMovie.jsx";
 
 import LoadingDisplay from "../components/LoadingDisplay.jsx";
 import ErrorDisplay from "../components/ErrorDisplay.jsx";
+import Skeleton from "./Skeleton.jsx";
 
 function PaginatedItems() {
   const params = useParams();
@@ -55,12 +56,14 @@ function PaginatedItems() {
     focusDiv.current.scrollIntoView();
   };
 
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <>
       <h2 className="text-center text-2xl pt-8">Searched Movie Results</h2>
-      {isLoading && <LoadingDisplay />}
+
       {isError && <ErrorDisplay error={error} />}
-      <div className="grid items-center justify-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="grid grid-cols-2 items-center justify-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        {isLoading && arr.map((item) => <Skeleton key={item} />)}
         {data &&
           data.results.map((filmData) => {
             return (

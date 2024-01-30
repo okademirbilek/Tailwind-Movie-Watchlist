@@ -4,26 +4,34 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const SliderItem = ({ movie }) => {
+  console.log(movie);
   const [isShown, setIsShown] = useState(false);
   const styles = isShown
     ? {
         boxShadow: "0px 0px 30px 0px white",
         opacity: 0.6,
         transform: "scale(1.1)",
+        transition: "ease",
       }
     : {};
 
   return (
     <div
-      className="relative"
+      className="relative rounded-md  mx-auto my-8 w-[200px] h-[300px] md:w-[175px] md:h-[250px]   transition"
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}
     >
       <img
-        className="carousel-img mx-auto my-8 w-[200px] h-[300px] md:w-[175px] md:h-[250px] rounded-xl  transition"
+        className="carousel-img w-full h-full rounded-lg "
         style={styles}
         src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
       ></img>
+      {!isShown && (
+        <div className="flex items-center rounded-b-md justify-center w-full h-6 absolute bottom-0 bg-opacity-95 bg-zinc-950">
+          <h2 className="px-4">{movie.release_date}</h2>
+        </div>
+      )}
+
       {isShown && (
         <Link to={`/details/${movie.id}`}>
           <img

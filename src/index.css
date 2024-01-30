@@ -40,10 +40,10 @@
   /* buttons */
 
   .remove-btn {
-    @apply bg-no-repeat bg-center cursor-pointer bg-red-400 block;
+    @apply bg-no-repeat bg-center cursor-pointer bg-red-600 block hover:bg-red-800;
   }
   .add-btn {
-    @apply bg-no-repeat  bg-center cursor-pointer bg-green-600 block;
+    @apply bg-no-repeat  bg-center cursor-pointer bg-green-600 block hover:bg-green-400;
   }
 
   .login-container {
@@ -103,6 +103,15 @@
 
   /* cart items*/
   .badge {
-    @apply flex items-center flex-shrink-0  gap-2 px-3 py-0.5 bg-[#321C76] rounded-sm w-fit;
+    @apply flex items-center flex-shrink-0  gap-2 px-3 py-0.5  rounded-sm w-fit;
+  }
+  .badge-colorP {
+    @apply bg-[#321C76];
+  }
+  .badge-colorB {
+    @apply bg-green-800;
+  }
+  .badge-colorD {
+    @apply bg-slate-700;
   }
 }

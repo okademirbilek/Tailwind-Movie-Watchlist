@@ -22,8 +22,9 @@ export const fetchPopularMovies = async ({ pageParam }) => {
 };
 
 export const fetchUpcomingMovies = async () => {
+  // `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&sort_by=popularity.desc`,
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&sort_by=popularity.desc`,
+    `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2024&primary_release_date.gte=2024-02-01&release_date.lte=2024-06-20&sort_by=popularity.desc`,
     {
       headers: {
         Authorization: `Bearer ${token2}`,

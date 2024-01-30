@@ -23,15 +23,24 @@ function Header() {
 
   return (
     <header className="container mx-auto w-full flex items-center justify-between pt-4 pb-6 px-4">
-      <Link to="/">Movie</Link>
+      <Link className=" text-2xl" to="/">
+        Movie
+      </Link>
+      <img
+        src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"
+        title="Inline logo for TMDB"
+        alt="TMDB"
+        className="w-40 cursor-pointer"
+      />
       <nav className="flex justify-between items-center gap-12">
         <Link className="flex items-center gap-2" to="/watchList">
-          <h2 className="text-xl">MY WATCHLIST</h2>
+          <h2 className="text-xl hidden md:block">MY WATCHLIST</h2>
           <img className="w-10 h-10" src={WatchListIcon}></img>
         </Link>
+
         <Link to="/dashboard">
           <div className="flex items-center gap-2">
-            <img src={avatar} className="w-10 h-10"></img>
+            <img src={avatar} className="w-10 h-10 bg-white rounded-full"></img>
             <h5 className="text-xl">
               {/* {currentUser?.displayName || "MovieStar123"} */}
             </h5>

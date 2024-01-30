@@ -8,6 +8,8 @@ import { Icon } from "react-icons-kit";
 import { dollar } from "react-icons-kit/fa/dollar";
 import { clockO } from "react-icons-kit/fa/clockO";
 
+import { chevronLeft } from "react-icons-kit/fa/chevronLeft";
+
 import { Link } from "react-router-dom";
 
 import PopularMovieCart from "../components/PopularMovieCart";
@@ -30,41 +32,52 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
 
   const detail = btnId === "add-btn" ? data : data.firebaseId;
   return (
-    <div className="container mx-auto flex flex-col rounded-xl bg-[#08021D] pb-5 ">
-      <div className="flex flex-col  py-4  px-3 md:px-4 md:flex-row gap-6  md:mt-10 md:mx-8">
-        <div className="flex flex-shrink-0 relative w-[233.3px] h-[350px] ">
-          {data.poster_path !== null ? (
-            <img
-              src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
-              className="w-full h-full rounded-sm max-w-none"
-              alt={`${data.Title} Poster`}
-            />
-          ) : (
-            <img
-              className="w-full h-full rounded-sm max-w-none"
-              src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg"
-            />
-          )}
-          <div className="badge absolute bottom-2 right-2 bg-green-500 bg-opacity-80">
-            <p>{data.status}</p>
-          </div>
-          <div className="badge absolute bottom-2 left-2 bg-orange-600 bg-opacity-80">
-            <p>{data.original_language.toUpperCase()}</p>
-          </div>
+    <div className="container mx-auto flex flex-col rounded-xl  bg-slate-800  pb-5 ">
+      <div className=" ml-3 md:ml-12 mt-6 bg-[#141212] hover:bg-white  hover:text-black w-fit px-4 py-1 rounded-md">
+        <Link className="flex gap-3" to={"/"}>
+          <Icon icon={chevronLeft} size={16} />
+          <h2>Back</h2>
+        </Link>
+      </div>
+      <div className="flex flex-col  py-4  px-3 md:px-4 md:flex-row gap-6  md:mt-2 md:mx-8">
+        <div className="flex flex-col">
+          <div className="flex flex-shrink-0 relative w-[233.3px] h-[350px] ">
+            {data.poster_path !== null ? (
+              <img
+                src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
+                className="w-full h-full rounded-sm max-w-none"
+                alt={`${data.Title} Poster`}
+              />
+            ) : (
+              <img
+                className="w-full h-full rounded-sm max-w-none"
+                src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg"
+              />
+            )}
+            <div className="badge px-1 py-0 absolute bottom-1 right-1 bg-green-500 bg-opacity-80">
+              <p>{data.status}</p>
+            </div>
+            <div className="badge py-0 absolute bottom-1 left-1 bg-red-500 bg-opacity-80">
+              <p>{data.original_language.toUpperCase()}</p>
+            </div>
 
-          <button
-            onClick={() => onClick(detail)}
-            disabled={isExist}
-            className={` absolute top-2 left-2 w-8 h-8 rounded-full disabled:bg-slate-600 disabled:cursor-default  ${
-              btnId === "add-btn"
-                ? "add-btn bg-add-btn"
-                : "remove-btn bg-remove-btn"
-            }`}
-          ></button>
+            <button
+              onClick={() => onClick(detail)}
+              disabled={isExist}
+              className={` absolute top-2 left-2 w-8 h-8 rounded-full disabled:bg-slate-600 disabled:cursor-default  ${
+                btnId === "add-btn"
+                  ? "add-btn bg-add-btn"
+                  : "remove-btn bg-remove-btn"
+              }`}
+            ></button>
+          </div>
+          <div className=" flex justify-center cursor-pointer font-bold mb-6 bg-[#141212] hover:bg-white hover:text-black transition  w-[233.3px] mt-2  py-2 rounded-md">
+            <button onClick={() => setIsShown(true)}>Watch Trailer</button>
+          </div>
         </div>
         <div className=" flex flex-col gap-2">
           <div className="flex gap-4">
-            <h2 className="max-w-[200px] md:max-w-none text-3xl">
+            <h2 className="max-w-[275px] md:max-w-none text-3xl">
               {data.original_title}
             </h2>
             <Link to={data.homepage} target="__blank">
@@ -74,23 +87,26 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
             </Link>
           </div>
           <p>{data.overview}</p>
+
           <div className="flex flex-wrap gap-2">
-            <div className="badge">
+            <div className="badge badge-colorD">
               <Icon icon={star} size={18} className="mb-1" />
               <p>IMDB : {data.vote_average}</p>
             </div>
 
-            <p className="badge">IMDB_ID : {data.imdb_id}</p>
+            <p className="badge badge-colorD">IMDB_ID : {data.imdb_id}</p>
 
-            <p className="badge">Vote count : {data.vote_count} </p>
+            <p className="badge badge-colorD">
+              Vote count : {data.vote_count}{" "}
+            </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <div className="badge">
+            <div className="badge badge-colorD">
               <Icon icon={calendar} size={18} className="mb-1" />
               <p className="hidden md:block">Release Date : </p>
               <p>{data.release_date}</p>
             </div>
-            <div className="badge">
+            <div className="badge badge-colorD">
               <Icon icon={clockO} size={22} className="mb-1" />
               <p className="hidden md:block"> Duration : </p>
               <p>{data.runtime} min</p>
@@ -98,11 +114,11 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <div className="badge">
+            <div className="badge badge-colorD">
               <p>Budget : {data.budget}</p>
               <Icon icon={dollar} size={18} className="mb-1" />
             </div>
-            <div className="badge">
+            <div className="badge badge-colorD">
               <p>Revenue : {data.revenue}</p>
               <Icon icon={dollar} size={18} className="mb-1" />
             </div>
@@ -111,7 +127,7 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
           <div className="flex flex-wrap gap-2">
             {data.genres.map((item) => {
               return (
-                <div key={item.id} className="badge">
+                <div key={item.id} className="badge badge-colorP">
                   {item.name}
                 </div>
               );
@@ -121,7 +137,7 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
           <div className="flex gap-1 items-center justify-start  overflow-x-auto ">
             {data.production_companies.map((item) => {
               return (
-                <div key={item.id} className="badge mb-2">
+                <div key={item.id} className="badge bg-[#141212] mb-2">
                   <p>{item.name}</p>
                 </div>
               );
@@ -130,17 +146,13 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
         </div>
       </div>
 
-      <div className=" flex justify-center cursor-pointer mb-6 bg-black hover:bg-white hover:text-black transition  w-[233.3px] ml-12  py-2 rounded-md">
-        <button onClick={() => setIsShown(true)}>Watch Trailer</button>
-      </div>
-
       <div className="flex flex-col  px-12 mb-6">
         <h2 className="text-2xl my-2">Keywords</h2>
         <div className=" flex  flex-wrap gap-3   items-center justify-start  ">
           {data.keywords?.keywords?.map((item) => {
             return (
-              <div className="badge" key={item.id}>
-                <h3>#{item.name}</h3>
+              <div className="badge badge-colorB" key={item.id}>
+                <h3>{item.name}</h3>
               </div>
             );
           })}
@@ -162,7 +174,9 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
                   <h3 className="truncate my-1 font-bold">
                     {item.original_name}
                   </h3>
-                  <h3 className="truncate mt-1 mb-2">{item.character}</h3>
+                  <h3 className="truncate max-w-[175px] mt-1 mb-2">
+                    {item.character}
+                  </h3>
                 </div>
               );
             }

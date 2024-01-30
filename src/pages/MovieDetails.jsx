@@ -17,7 +17,7 @@ export default function MovieDetails() {
   const { data, isLoading, isError, error } = useFetchDetailMovie(params);
 
   return (
-    <div className="movie-detail-container container mx-auto">
+    <div className=" container mx-auto">
       {isLoading && <LoadingDisplay />}
       {isError && <ErrorDisplay error={error} />}
       {data && (
