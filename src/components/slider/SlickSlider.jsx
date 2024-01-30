@@ -8,6 +8,44 @@ import ErrorDisplay from "../ErrorDisplay";
 import "./slick.css";
 import "./slick-theme.css";
 
+import { Icon } from "react-icons-kit";
+import { chevronLeft } from "react-icons-kit/fa/chevronLeft";
+import { chevronRight } from "react-icons-kit/fa/chevronRight";
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <Icon
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        color: "white",
+      }}
+      size={40}
+      onClick={onClick}
+      icon={chevronRight}
+    />
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <Icon
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        color: "white",
+      }}
+      size={40}
+      onClick={onClick}
+      icon={chevronLeft}
+    />
+  );
+}
+
 function SlickSlider(props) {
   const settings = {
     dots: true,
@@ -19,6 +57,8 @@ function SlickSlider(props) {
     autoplaySpeed: 2500,
     speed: 800,
     pauseOnHover: true,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
     responsive: [
       {
         breakpoint: 1480,

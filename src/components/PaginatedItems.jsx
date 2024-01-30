@@ -59,7 +59,7 @@ function PaginatedItems() {
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <>
-      <h2 className="text-center text-2xl pt-8">Searched Movie Results</h2>
+      <h2 className="text-center text-2xl pt-8 mb-4">Searched Movie Results</h2>
 
       {isError && <ErrorDisplay error={error} />}
       <div className="grid grid-cols-2 items-center justify-center md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">

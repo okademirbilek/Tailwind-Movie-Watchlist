@@ -10,7 +10,7 @@ import { clockO } from "react-icons-kit/fa/clockO";
 
 import { chevronLeft } from "react-icons-kit/fa/chevronLeft";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import PopularMovieCart from "../components/PopularMovieCart";
 import WatchTrailer from "./WatchTrailer";
@@ -25,19 +25,19 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
     btnId === "add-btn" &&
     movieData.some((filmList) => filmList.id === data.id);
 
-  console.log(data);
-
   //to use this component in 2 places we control the firebase id to
   //delete correct data when we use this component in watchlist
 
   const detail = btnId === "add-btn" ? data : data.firebaseId;
+
+  const navigate = useNavigate();
   return (
     <div className="container mx-auto flex flex-col rounded-xl  bg-slate-800  pb-5 ">
       <div className=" ml-3 md:ml-12 mt-6 bg-[#141212] hover:bg-white  hover:text-black w-fit px-4 py-1 rounded-md">
-        <Link className="flex gap-3" to={"/"}>
+        <button className="flex gap-3" onClick={() => navigate(-1)}>
           <Icon icon={chevronLeft} size={16} />
           <h2>Back</h2>
-        </Link>
+        </button>
       </div>
       <div className="flex flex-col  py-4  px-3 md:px-4 md:flex-row gap-6  md:mt-2 md:mx-8">
         <div className="flex flex-col">
@@ -46,7 +46,7 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
               <img
                 src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
                 className="w-full h-full rounded-sm max-w-none"
-                alt={`${data.Title} Poster`}
+                alt={`${data.title} Poster`}
               />
             ) : (
               <img
@@ -78,7 +78,7 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
         <div className=" flex flex-col gap-2">
           <div className="flex gap-4">
             <h2 className="max-w-[275px] md:max-w-none text-3xl">
-              {data.original_title}
+              {data.title}
             </h2>
             <Link to={data.homepage} target="__blank">
               <div className="flex items-center justify-center cursor-pointer bg-[#321C76] hover:bg-white hover:text-[#321C76] rounded-full  w-[40px] h-[40px]">
@@ -151,7 +151,10 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
         <div className=" flex  flex-wrap gap-3   items-center justify-start  ">
           {data.keywords?.keywords?.map((item) => {
             return (
-              <div className="badge badge-colorB" key={item.id}>
+              <div
+                className="badge py-1 px-4 bg-black bg-opacity-35"
+                key={item.id}
+              >
                 <h3>{item.name}</h3>
               </div>
             );

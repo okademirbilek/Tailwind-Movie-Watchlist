@@ -29,7 +29,7 @@ const PopularMovieCart = ({ data }) => {
       )}
 
       <div className="flex items-center justify-center w-full h-10 absolute bottom-0 bg-opacity-95 bg-zinc-950">
-        <h2 className="max-w-[200px] truncate px-4">{data.original_title}</h2>
+        <h2 className="max-w-[200px] truncate px-4">{data.title}</h2>
       </div>
       <div className="flex justify-center w-14 h-6 absolute top-1 right-1 rounded-md bg-opacity-95 bg-zinc-950">
         <h2 className="">⭐{data.vote_average.toFixed(1)}</h2>
