@@ -5,14 +5,6 @@ import { Link } from "react-router-dom";
 
 const SliderItem = ({ movie }) => {
   const [isShown, setIsShown] = useState(false);
-  // const styles = isShown
-  //   ? {
-  //       boxShadow: "0px 0px 30px 0px white",
-  //       opacity: 0.6,
-  //       transform: "scale(1.1)",
-  //       transition: "ease",
-  //     }
-  //   : {};
 
   const styles = isShown
     ? {
@@ -40,7 +32,7 @@ const SliderItem = ({ movie }) => {
         />
       )}
 
-      <div className="flex flex-col overflow-hidden items-center rounded-b-md justify-center w-full h-fit absolute bottom-0 bg-opacity-95 bg-zinc-950">
+      <div className="flex flex-col overflow-hidden items-center  justify-center w-full h-fit absolute bottom-0 bg-opacity-95 bg-zinc-950">
         <h2 className="px-4 truncate max-w-[200px]  text-yellow-500">
           {movie.title}
         </h2>

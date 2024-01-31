@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
 import { home } from "react-icons-kit/fa/home";
@@ -18,6 +18,14 @@ import useToggle from "../hooks/useToggle";
 
 const MovieDetailCart = ({ onClick, btnId, data }) => {
   const [isShown, setIsShown] = useToggle(false);
+
+  useEffect(() => {
+    if (isShown) {
+      document.body.classList.add("overflow-y-hidden");
+    } else {
+      document.body.classList.remove("overflow-y-hidden");
+    }
+  }, [isShown]);
 
   const { movieData } = useAuth();
   //check if the movie already in watchlist
@@ -203,8 +211,8 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
       </div>
 
       {isShown && (
-        <div className="absolute inset-0 flex items-center justify-center w-full h-screen  bg-black bg-opacity-70">
-          <div className="flex items-center justify-center w-[60%] h-[40%]">
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center  w-full h-screen overscroll-y-none bg-black bg-opacity-70">
+          <div className="flex items-center justify-center w-[96%]">
             <WatchTrailer setIsShown={setIsShown} data={data.videos?.results} />
           </div>
         </div>
