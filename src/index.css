@@ -50,6 +50,34 @@
     @apply bg-[url('https://images2.alphacoders.com/132/1320812.png')] bg-cover bg-center bg-no-repeat;
   }
 
+  .leftright {
+    height: 4px;
+    width: 30px;
+    position: absolute;
+    background-color: #f4a259;
+    border-radius: 2px;
+    transform: rotate(45deg);
+    transition: all 0.3s ease-in;
+  }
+
+  .rightleft {
+    height: 4px;
+    width: 30px;
+    position: absolute;
+    background-color: #f4a259;
+    border-radius: 2px;
+    transform: rotate(-45deg);
+    transition: all 0.3s ease-in;
+  }
+  .close-container:hover .leftright {
+    transform: rotate(-45deg);
+    background-color: #f25c66;
+  }
+  .close-container:hover .rightleft {
+    transform: rotate(45deg);
+    background-color: #f25c66;
+  }
+
   /* alerts */
 
   .alert {

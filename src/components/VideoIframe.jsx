@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-const VideoIframe = ({ data }) => {
+const VideoIframe = memo(({ data, index }) => {
   return (
     <iframe
       className="container mx-auto  aspect-video  xl:max-w-[1140px] xl:max-h-[615px] "
@@ -10,8 +10,9 @@ const VideoIframe = ({ data }) => {
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowFullScreen
       //   onTouchCancel={true}
+      id={index}
     ></iframe>
   );
-};
+});
 
 export default VideoIframe;

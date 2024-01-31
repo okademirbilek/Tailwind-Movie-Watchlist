@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useAuth } from "../context/AuthContext";
 
 import { home } from "react-icons-kit/fa/home";
@@ -17,6 +17,7 @@ import WatchTrailer from "./WatchTrailer";
 import useToggle from "../hooks/useToggle";
 
 const MovieDetailCart = ({ onClick, btnId, data }) => {
+  console.log("MovieDetailCart");
   const [isShown, setIsShown] = useToggle(false);
 
   useEffect(() => {
@@ -36,7 +37,10 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
   //to use this component in 2 places we control the firebase id to
   //delete correct data when we use this component in watchlist
 
-  const detail = btnId === "add-btn" ? data : data.firebaseId;
+  // const detail = btnId === "add-btn" ? data : data.firebaseId;
+  const detail = useMemo(() => {
+    return btnId === "add-btn" ? data : data.firebaseId;
+  }, [btnId]);
 
   const navigate = useNavigate();
   return (
@@ -211,10 +215,14 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
       </div>
 
       {isShown && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center  w-full h-screen overscroll-y-none bg-black bg-opacity-70">
-          <div className="flex items-center justify-center w-[96%]">
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-0  w-full h-screen  bg-black bg-opacity-80">
+          <div className="flex items-center justify-center w-[96%] md:max-w-[560px] xl:max-w-[1140px] z-50">
             <WatchTrailer setIsShown={setIsShown} data={data.videos?.results} />
           </div>
+          <div
+            onClick={() => isShown && setIsShown(false)}
+            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-screen z-0 "
+          ></div>
         </div>
       )}
     </div>
