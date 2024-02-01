@@ -82,9 +82,13 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
               }`}
             ></button>
           </div>
-          <div className=" flex justify-center cursor-pointer font-bold mb-6 bg-[#141212] hover:bg-white hover:text-black transition  w-[233.3px] mt-2  py-2 rounded-md">
-            <button onClick={() => setIsShown(true)}>Watch Trailer</button>
-          </div>
+
+          <button
+            className=" flex justify-center cursor-pointer font-bold mb-6 bg-[#141212] hover:bg-white hover:text-black transition  w-[233.3px] mt-2  py-2 rounded-md"
+            onClick={() => setIsShown(true)}
+          >
+            Watch Trailer
+          </button>
         </div>
         <div className=" flex flex-col gap-2">
           <div className="flex gap-4">

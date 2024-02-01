@@ -11,7 +11,7 @@ export const stopVideos = (currentvideo) => {
 };
 
 export const callSnackBar = (message, variant) => {
-  let snackbar = enqueueSnackbar(message, {
+  enqueueSnackbar(message, {
     anchorOrigin: { vertical: "bottom", horizontal: "right" },
     variant: variant,
   });

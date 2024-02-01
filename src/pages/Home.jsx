@@ -16,7 +16,7 @@ function Home() {
   const location = useLocation();
 
   return (
-    <div className="container mx-auto   pb-6 rounded-xl bg-slate-800">
+    <div className="container mx-auto   pb-6 md:rounded-xl bg-slate-800">
       {(location.key === "default" && location.pathname === "/") ||
       location.key !== "default" ? (
         <div>
