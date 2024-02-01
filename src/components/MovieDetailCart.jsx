@@ -17,7 +17,6 @@ import WatchTrailer from "./WatchTrailer";
 import useToggle from "../hooks/useToggle";
 
 const MovieDetailCart = ({ onClick, btnId, data }) => {
-  console.log("MovieDetailCart");
   const [isShown, setIsShown] = useToggle(false);
 
   useEffect(() => {

@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
-import { enqueueSnackbar } from "notistack";
 import { auth, db } from "../firebase";
 import {
   onSnapshot,
@@ -18,6 +17,8 @@ import {
   updatePassword,
   updateProfile,
 } from "firebase/auth";
+
+import { callSnackBar } from "../utils/utils";
 
 const AuthContext = createContext();
 
@@ -84,28 +85,29 @@ function AuthProvider({ children }) {
   }, [currentUser]);
 
   async function addNewMovie(movieobj) {
-    let isExist = movieData.some((filmList) => filmList.id === movieobj.id);
-    let message = isExist ? "Already in watchlist" : "Added to watchlist";
-    let variant = isExist ? "error" : "success";
-    let snackbar = enqueueSnackbar(message, {
-      anchorOrigin: { vertical: "bottom", horizontal: "right" },
-      variant: variant,
-    });
-    if (isExist) {
-      snackbar;
+    if (currentUser) {
+      let isExist = movieData.some((filmList) => filmList.id === movieobj.id);
+      let message = isExist ? "Already in watchlist" : "Added to watchlist";
+      let variant = isExist ? "error" : "success";
+      if (isExist) {
+        callSnackBar(message, variant);
+      } else {
+        await addDoc(moviesCollection, { ...movieobj, updatedAt: Date.now() });
+        callSnackBar(message, variant);
+      }
     } else {
-      await addDoc(moviesCollection, { ...movieobj, updatedAt: Date.now() });
-      snackbar;
+      callSnackBar("You must login first", "warning");
     }
   }
 
   async function deleteMovie(id) {
-    const docRef = doc(db, `${currentUser?.uid}`, id);
-    await deleteDoc(docRef);
-    enqueueSnackbar("Removed from watchlist", {
-      anchorOrigin: { vertical: "bottom", horizontal: "right" },
-      variant: "info",
-    });
+    if (currentUser) {
+      const docRef = doc(db, `${currentUser?.uid}`, id);
+      await deleteDoc(docRef);
+      callSnackBar("Removed from watchlist", "info");
+    } else {
+      callSnackBar("You must login first", "warning");
+    }
   }
 
   /************************************** Firebase Collection****************************************** */

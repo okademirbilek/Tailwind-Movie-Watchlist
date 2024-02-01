@@ -1,50 +1,88 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import WatchList from "./pages/WatchList";
 import "./index.css";
-import MovieDetails from "./pages/MovieDetails.jsx";
-import { BrowserRouter } from "react-router-dom";
-import NotFound from "./pages/NotFound";
-import AuthRequired from "./components/AuthRequired";
-import SignUp from "./pages/authentication/SignUp.jsx";
-import Login from "./pages/authentication/Login.jsx";
+
+import { SnackbarProvider } from "notistack";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import Dashboard from "./pages/Dashboard";
-import ForgotPassword from "./pages/authentication/ForgotPassword.jsx";
-import UpdateProfile from "./pages/UpdateProfile";
-import Header from "./components/Header";
+
+import {
+  Home,
+  WatchList,
+  MovieDetails,
+  NotFound,
+  SignUp,
+  Login,
+  Dashboard,
+  ForgotPassword,
+  UpdateProfile,
+  Root,
+} from "./pages/index";
+
 import PaginatedItems from "./components/PaginatedItems";
 import PopularMovies from "./components/PopularMovies";
-import { SnackbarProvider } from "notistack";
+import AuthRequired from "./components/AuthRequired";
+
+const router = createBrowserRouter([
+  {
+    element: <Root />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+        errorElement: <NotFound />,
+        children: [
+          {
+            index: true,
+            element: <PopularMovies />,
+          },
+          {
+            path: "/search/:movie/:page",
+            element: <PaginatedItems />,
+          },
+        ],
+      },
+      {
+        path: "details/:id",
+        element: <MovieDetails />,
+      },
+      {
+        element: <AuthRequired />,
+        children: [
+          {
+            path: "/watchList",
+            element: <WatchList />,
+          },
+          {
+            path: "/dashboard",
+            element: <Dashboard />,
+          },
+          {
+            path: "update-profile",
+            element: <UpdateProfile />,
+          },
+        ],
+      },
+      {
+        path: "/sign-up",
+        element: <SignUp />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+      },
+    ],
+  },
+]);
 
 function App() {
   return (
     <AuthProvider>
       <div className="App max-h-screen">
-        <BrowserRouter>
-          <Header />
-          <Routes>
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-
-            <Route element={<AuthRequired />}>
-              <Route path="/" element={<Home />}>
-                <Route index element={<PopularMovies />} />
-                <Route
-                  path="/search/:movie/:page"
-                  element={<PaginatedItems />}
-                />
-              </Route>
-              <Route path="details/:id" element={<MovieDetails />} />
-              <Route path="/watchList" element={<WatchList />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/update-profile" element={<UpdateProfile />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-          <SnackbarProvider autoHideDuration={1000} />
-        </BrowserRouter>
+        <RouterProvider router={router} />
+        <SnackbarProvider autoHideDuration={1000} />
       </div>
     </AuthProvider>
   );
