@@ -10,7 +10,8 @@ const VideoIframe = memo(({ data, index }) => {
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowFullScreen
       //   onTouchCancel={true}
-      id={index}
+      id={`video-${index}`}
+      loading="lazy"
     ></iframe>
   );
 });

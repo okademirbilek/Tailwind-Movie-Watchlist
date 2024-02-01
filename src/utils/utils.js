@@ -1,15 +1,18 @@
 export const stopVideos = function (currentvideo) {
-  // const videos = document.querySelectorAll(`#video-${currentvideo}`);
-  const videos = document.querySelectorAll("iframe, video");
+  const videos = document.querySelectorAll(`#video-${currentvideo}`);
+  // const videos = document.querySelectorAll("iframe, video");
 
   Array.prototype.forEach.call(videos, function (video) {
-    if (video.tagName.toLowerCase() === "video" && video.id == currentvideo) {
-      video.pause();
-    } else if (video.id == currentvideo) {
-      console.log("yeaaaa");
-      const src = video.src;
-      video.src = src;
-    }
+    console.log(video);
+    const src = video.src;
+    video.src = src;
+    // if (video.tagName.toLowerCase() === "video" && video.id == currentvideo) {
+    //   video.pause();
+    // } else if (video.id == currentvideo) {
+    //   console.log("yeaaaa");
+    //   const src = video.src;
+    //   video.src = src;
+    // }
   });
 };
 // export const stopVideos = function (currentvideo) {
