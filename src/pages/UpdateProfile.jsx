@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { Icon } from "react-icons-kit";
+import { chevronLeft } from "react-icons-kit/fa/chevronLeft";
 
 export default function UpdateProfile() {
   const { currentUser, updateEmailUser, updatePasswordUser } = useAuth();
@@ -53,11 +56,12 @@ export default function UpdateProfile() {
   }
 
   return (
-    <div className="login-container">
-      <div className="glass-container">
-        <h1>Update Profile</h1>
-        <form onSubmit={handleSubmit} className="form">
-          <label className="input-label" htmlFor="email">
+    <div className="container mx-auto min-h-[700px] flex flex-col items-center justify-center rounded-xl  lg:bg-slate-800  pb-5 ">
+      <div className="w-fit flex flex-col  justify-center gap-2  bg-gray-700 px-6 pt-6 pb-8 my-4 rounded-md">
+        <h1 className="text-4xl">Update Profile</h1>
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+          <label className="text-xl text-gray-300" htmlFor="email">
             Email
           </label>
           <input
@@ -67,40 +71,53 @@ export default function UpdateProfile() {
             placeholder="Email address"
             value={updateFormData.email}
             required
+            className=" text-gray-800 tracking-wide text-md font-bold rounded-sm pl-2 py-1.5 pr-8 min-w-[275px] "
           />
-          <label className="input-label" htmlFor="password">
+          <label className="text-xl  text-gray-300" htmlFor="password">
             Password
+          </label>
+          <label className="text-sm -mt-2 text-gray-400" htmlFor="password">
+            (Leave blank to keep the same)
           </label>
           <input
             id="password"
             name="password"
             onChange={handleChange}
             type="password"
-            placeholder="Leave blank to keep the same"
+            placeholder="★★★★★★★★★★★"
             value={updateFormData.password}
+            className=" text-gray-800 tracking-wide text-md font-bold rounded-sm pl-2 py-1.5 pr-8 "
           />
-          <label className="input-label" htmlFor="passwordConfirm">
+          <label className="text-xl text-gray-300" htmlFor="passwordConfirm">
             Password Confirm
           </label>
           <input
             name="passwordConfirm"
             onChange={handleChange}
             type="password"
-            placeholder="Leave blank to keep the same"
+            placeholder="★★★★★★★★★★★"
             value={updateFormData.passwordConfirm}
+            className=" text-gray-800 tracking-wide text-md font-bold rounded-sm pl-2 py-1.5 pr-8 "
           />
           {error && (
             <div className="alert">
               <h3 className="login-error">{error}</h3>
             </div>
           )}
-          <button disabled={status === "submitting"}>
+          <button
+            className=" bg-gray-500 hover:bg-slate-800 rounded-md py-1.5 mt-5"
+            disabled={status === "submitting"}
+          >
             {status === "submitting" ? "Updating..." : "Update"}
           </button>
         </form>
-        <div className="link-div">
-          <Link to="/dashboard"> Cancel </Link>
-        </div>
+        <Link
+          to="/dashboard"
+          className="flex gap-2  cursor-pointer  bg-[#141212] mt-1  hover:bg-slate-800 w-fit px-4 py-1.5 rounded-md"
+        >
+          <Icon icon={chevronLeft} size={16} />
+          <h2>Cancel</h2>
+        </Link>
       </div>
     </div>
   );

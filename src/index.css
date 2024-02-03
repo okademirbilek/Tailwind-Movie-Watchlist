@@ -8,11 +8,11 @@
     @apply font-roboto bg-[#100F10] text-white;
   }
   .input {
-    @apply rounded-md font-bold indent-1 pl-2 pr-4 py-2.5 outline-none text-black;
+    @apply rounded-md font-bold indent-1 pl-2 pr-8 py-2.5 outline-none text-black;
   }
 
   .glass-container {
-    @apply bg-[#25232380]  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 px-6 py-8 container flex flex-col items-center w-auto  mx-auto rounded-2xl;
+    @apply bg-[#25232380]  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 px-8 py-8 container flex flex-col items-center w-auto  mx-auto rounded-2xl;
   }
 
   /* scrollbar */

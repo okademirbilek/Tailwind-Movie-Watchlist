@@ -37,8 +37,8 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="login-container flex items-center  h-screen text-white">
-      <div className="glass-container">
+    <div className="flex items-center   text-white">
+      <div className="glass-container mt-48">
         <h1 className="text-4xl my-2 text-[#53ddff] ">Reset password</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 my-3">
           <label className="text-2xl" htmlFor="reset-email">

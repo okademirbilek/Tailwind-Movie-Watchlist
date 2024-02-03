@@ -47,12 +47,12 @@ export default function SignUp() {
   }
 
   return (
-    <div className="login-container flex items-center  h-screen text-white">
-      <div className="glass-container ">
+    <div className="flex items-center   text-white">
+      <div className="glass-container mt-16 ">
         <h1 className="text-5xl my-2 text-[#53ddff] ">Sign up</h1>
         <div className=" pl-1 py-2.5 my-2 rounded">
-          <p className="max-w-[267px] text-lg">
-            ⚠️You can use a random email and password for signing up.
+          <p className="max-w-[250px] text-lg">
+            You can use a random email and password for signing up.
           </p>
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 my-3">
@@ -79,7 +79,7 @@ export default function SignUp() {
               name="password"
               onChange={handleChange}
               type={inputType}
-              placeholder="Type your password"
+              placeholder="★★★★★★★★★★★"
               value={signUpFormData.password}
               minLength={6}
               maxLength={40}
@@ -111,7 +111,7 @@ export default function SignUp() {
             name="passwordConfirm"
             onChange={handleChange}
             type={inputType}
-            placeholder="Confirm your password"
+            placeholder="★★★★★★★★★★★"
             value={signUpFormData.passwordConfirm}
             maxLength={40}
             required

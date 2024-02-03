@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useAuth } from "../context/AuthContext";
 
 import { home } from "react-icons-kit/fa/home";
@@ -50,6 +50,7 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
           <h2>Back</h2>
         </button>
       </div>
+
       <div className="flex flex-col  py-4  px-3 md:px-4 md:flex-row gap-6  md:mt-2 md:mx-8">
         <div className="flex flex-col">
           <div className="flex flex-shrink-0 relative w-[233.3px] h-[350px] ">
@@ -193,7 +194,7 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
                     {item.original_name}
                   </h3>
                   <h3 className="truncate max-w-[175px] mt-1 mb-2">
-                    {item.character}
+                    {item?.character || "No Character Name"}
                   </h3>
                 </div>
               );

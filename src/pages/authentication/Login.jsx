@@ -49,8 +49,8 @@ export default function Login() {
   }
 
   return (
-    <div className="login-container flex items-center  h-screen text-white">
-      <div className="glass-container ">
+    <div className=" flex items-center   text-white">
+      <div className="glass-container mt-32 ">
         <h1 className="text- text-5xl my-2 text-[#53ddff] ">Sign in </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 my-3  ">
           <label className="text-2xl" htmlFor="login-email">
@@ -75,7 +75,7 @@ export default function Login() {
               name="password"
               onChange={handleChange}
               type={inputType}
-              placeholder="🔒 123456"
+              placeholder="🔒 ★★★★★★★★"
               value={loginFormData.password}
               minLength={6}
               className="input -ml-2"
