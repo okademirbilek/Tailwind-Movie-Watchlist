@@ -15,6 +15,7 @@ import {
   ForgotPassword,
   UpdateProfile,
   Root,
+  PersonDetail,
 } from "./pages/index";
 
 import PaginatedItems from "./components/PaginatedItems";
@@ -40,8 +41,12 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "details/:id",
+        path: "/details/:id",
         element: <MovieDetails />,
+      },
+      {
+        path: "/person/details/:personId",
+        element: <PersonDetail />,
       },
       {
         element: <AuthRequired />,

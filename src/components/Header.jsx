@@ -67,7 +67,7 @@ function Header() {
                   src={avatar}
                   className="w-10 h-10  bg-white rounded-full"
                 ></img> */}
-                <Icon className="md:mb-1" icon={user_circle} size={40} />
+                <Icon icon={user_circle} size={40} />
               </>
             ) : null}
           </div>

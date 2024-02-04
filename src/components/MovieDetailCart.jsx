@@ -8,9 +8,9 @@ import { Icon } from "react-icons-kit";
 import { dollar } from "react-icons-kit/fa/dollar";
 import { clockO } from "react-icons-kit/fa/clockO";
 
-import { chevronLeft } from "react-icons-kit/fa/chevronLeft";
+import BackButton from "./ui/BackButton";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import PopularMovieCart from "../components/PopularMovieCart";
 import WatchTrailer from "./WatchTrailer";
@@ -41,14 +41,14 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
     return btnId === "add-btn" ? data : data.firebaseId;
   }, [btnId]);
 
-  const navigate = useNavigate();
   return (
     <div className="container mx-auto flex flex-col rounded-xl  bg-slate-800  pb-5 ">
       <div className=" ml-3 md:ml-12 mt-6 bg-[#141212] hover:bg-white  hover:text-black w-fit px-4 py-1 rounded-md">
-        <button className="flex gap-3" onClick={() => navigate(-1)}>
+        {/* <button className="flex gap-3" onClick={() => navigate(-1)}>
           <Icon icon={chevronLeft} size={16} />
           <h2>Back</h2>
-        </button>
+        </button> */}
+        <BackButton />
       </div>
 
       <div className="flex flex-col  py-4  px-3 md:px-4 md:flex-row gap-6  md:mt-2 md:mx-8">
@@ -184,7 +184,11 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
           {data.credits?.cast?.map((item, index) => {
             if (index < 11) {
               return (
-                <div key={item.id}>
+                <Link
+                  className="cursor-pointer"
+                  to={`/person/details/${item.id}`}
+                  key={item.id}
+                >
                   <img
                     className="w-[175px] h-[262px] max-w-none object-cover rounded-sm"
                     src={`https://image.tmdb.org/t/p/original/${item.profile_path}`}
@@ -196,7 +200,7 @@ const MovieDetailCart = ({ onClick, btnId, data }) => {
                   <h3 className="truncate max-w-[175px] mt-1 mb-2">
                     {item?.character || "No Character Name"}
                   </h3>
-                </div>
+                </Link>
               );
             }
           })}

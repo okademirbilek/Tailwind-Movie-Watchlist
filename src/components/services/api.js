@@ -63,12 +63,23 @@ export const fetchSearchMovie = async (
 export const fetchDetailMovie = async (params) => {
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${params.id}?api_key=${apiKey}&language=en-US&append_to_response=alternative_titles,videos,changes,credits,images,keywords,lists,releases,reviews,similar,translations, `
-    // {
-    //   headers: {
-    //     Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNjYwMDJjZDBjODBhMzliYjE0N2JjNDhlMGI0Njg4NSIsInN1YiI6IjY0Mzk0YWQ5MWQ1Mzg2MDBmNDBmZDg5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._G-3ZRhcRj7sNgeUdOJgszgcbSqXcTuyDBqaMUOKYr8`,
-    //     accept: "application/json",
-    //   },
-    // }
+  );
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const data = await response.json();
+  return data;
+};
+
+export const fetchPersonDetail = async (params) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/person/${params.personId}?language=en-US&append_to_response=movie_credits,images,latest,popular,tv_credits`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        accept: "application/json",
+      },
+    }
   );
   if (!response.ok) {
     throw new Error("Network response was not ok");

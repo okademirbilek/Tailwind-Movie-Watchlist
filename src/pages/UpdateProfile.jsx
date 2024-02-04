@@ -105,7 +105,7 @@ export default function UpdateProfile() {
             </div>
           )}
           <button
-            className=" bg-gray-500 hover:bg-slate-800 rounded-md py-1.5 mt-5"
+            className="  bg-slate-800 hover:bg-gray-500 rounded-md py-1.5 mt-5"
             disabled={status === "submitting"}
           >
             {status === "submitting" ? "Updating..." : "Update"}

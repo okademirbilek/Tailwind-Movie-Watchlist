@@ -8,3 +8,4 @@ export { default as NotFound } from "./NotFound";
 export { default as UpdateProfile } from "./UpdateProfile";
 export { default as WatchList } from "./WatchList";
 export { default as Root } from "./Root";
+export { default as PersonDetail } from "./PersonDetail";
