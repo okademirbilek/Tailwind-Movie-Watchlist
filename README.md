@@ -43,8 +43,16 @@
 
 ![image](https://github.com/okademirbilek/Sabancidx-Movie/assets/48480726/5441804d-cf53-41f7-addb-9accddc2cb4c)
 
-![image](https://github.com/okademirbilek/Tailwind-Movie-Watchlist/assets/48480726/1c5ad9cf-4813-4009-8ef6-f6c7f274bd00)                  ![image](https://github.com/okademirbilek/Tailwind-Movie-Watchlist/assets/48480726/82d8288d-003e-4f86-93b1-6ed95bf96ff8)
+                
 
+<div align="center">
+    <div align="left">
+      ![image](https://github.com/okademirbilek/Tailwind-Movie-Watchlist/assets/48480726/1c5ad9cf-4813-4009-8ef6-f6c7f274bd00)  
+    </div>
+    <div align="right">
+      ![image](https://github.com/okademirbilek/Tailwind-Movie-Watchlist/assets/48480726/82d8288d-003e-4f86-93b1-6ed95bf96ff8)
+    </div>
+</div>
 
 
 
