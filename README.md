@@ -9,7 +9,7 @@
   <h3 align="center">Sabancıdx Movie</h3>
 
   <p align="center">
-    <a href="https://sabancidxokan.netlify.app/">View live Demo</a>
+    <a href="https://demirbilekmovie.netlify.app/">View live Demo</a>
   </p>
 </div>
 
@@ -42,6 +42,9 @@
 ## About The Project
 
 ![image](https://github.com/okademirbilek/Sabancidx-Movie/assets/48480726/5441804d-cf53-41f7-addb-9accddc2cb4c)
+![image](https://github.com/okademirbilek/Tailwind-Movie-Watchlist/assets/48480726/1c5ad9cf-4813-4009-8ef6-f6c7f274bd00) ![image](https://github.com/okademirbilek/Tailwind-Movie-Watchlist/assets/48480726/82d8288d-003e-4f86-93b1-6ed95bf96ff8)
+
+
 
 
 It's a movie website where you can search for a movie, add it to your watchlist, watch the trailer. It also has authentication with Firebase; you need to sign up for the website to see pages. Some libraries inside my project are Tanstack Query, Notitack-snackbar, React-paginate, React-slick-carousel, and React-icons-kit. I learned these during the development: authentication with Firebase, Firestore database to save user data, env.local environment variables to hide sensetive information, Vite redirects with Spa's (single page applications), fetch abort to make unnecessary fetch operations with controllers.SRP(Single Responsibility principle) design pattern.
