@@ -1,8 +1,5 @@
 const apiKey = import.meta.env.VITE_REACT_APP_TMDB_API_KEY;
 const accessToken = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN;
-const token2 = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN2;
-
-const token1 = import.meta.env.VITE_REACT_APP_TMDB_ACCESS_TOKEN1;
 
 export const fetchPopularMovies = async ({ pageParam }) => {
   const response = await fetch(
@@ -27,7 +24,7 @@ export const fetchUpcomingMovies = async () => {
     `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2024&primary_release_date.gte=2024-02-01&release_date.lte=2024-06-20&sort_by=popularity.desc`,
     {
       headers: {
-        Authorization: `Bearer ${token2}`,
+        Authorization: `Bearer ${accessToken}`,
         accept: "application/json",
       },
     }
@@ -49,7 +46,7 @@ export const fetchSearchMovie = async (
     }&language=en-US&page=${params?.page || currentPage}&api_key=${apiKey}`,
     {
       headers: {
-        Authorization: `Bearer ${token1}`,
+        Authorization: `Bearer ${accessToken}`,
         accept: "application/json",
       },
     }
